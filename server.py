@@ -10,7 +10,8 @@ with socket.socket() as s:
     print('Aguardando conexão…')
     conn, addr = s.accept()
     with conn:
-        print(f'Conectado a ip: {addr[0]}, port: {addr[1]}.')
+        print(f'Conectado a ip: {addr[0]}, port: {addr[1]}.\n' \
+              + 'Aguardando mensagem…')
         is_connected = True
         while is_connected:
             data = conn.recv(1024)
@@ -18,12 +19,12 @@ with socket.socket() as s:
                 is_connected = False
             else:
                 signal = receive_signal(data)
-                print(f'Sinal digital: {signal}')
                 binary = decode_2b1q(signal)
-                print(f'Dados digitais: {binary}')
                 text = to_text(binary)
-                print(f'Texto: {text}')
                 decrypted = decrypt(text)
-                print(f'Descriptografada: {decrypted}')
+                print(f'Sinal digital: {signal}\n' \
+                      + f'Dados digitais: {binary}\n' \
+                      + f'Texto: {text}\n' \
+                      + f'Descriptografada: {decrypted}')
                 plot_graph(signal, 'Sinal Recebido')
     print('Conexão encerrada.')
