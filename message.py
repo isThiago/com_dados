@@ -21,7 +21,7 @@ def decrypt(message):
 
 
 def to_binary(text):
-    text = text.encode()
+    text = text.encode('latin_1')
     # Converte texto para lista de bits.
     binary = []
     for ch in text:
@@ -38,7 +38,7 @@ def to_text(binary):
         for j in range(0, 8):
             ch += 0 if binary[i + j] == 0 else 1 << j
         text.append(ch)
-    text = text.decode()
+    text = text.decode('latin_1')
     return text
 
 
